@@ -7,8 +7,8 @@ var time;
 onMovementBtn.addEventListener("click", onMovement);
 
 function updateTime() {
-	time = new Date();
-  timeElem.innerHTML = time.toLocaleTimeString();
+	today = new Date();
+  timeElem.innerHTML = today.toLocaleTimeString();
 }
 setInterval(updateTime, 1000);
 
@@ -28,8 +28,12 @@ function addRow (key, value) {
 }
 
 function onMovement() {
-	var hours = time.getHours();
-  var key = hours + " - " + (hours + 1);
+	var hours = today.getHours();
+  var dd = String(today.getDate()).padStart(2, '0');
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = today.getFullYear();
+	var date = dd + '/' + mm + '/' + yyyy;
+  var key = hours + " - " + (hours + 1) + " | " + date;
   if(countObj[key]) {
   	countObj[key] = countObj[key] + ' |';
     countTable.deleteRow(1);
